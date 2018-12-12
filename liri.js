@@ -121,3 +121,18 @@ function movieThis() {
     })
 };
 
+function doWhatItSays() {
+    // read random.txt file
+    fs.readFile("random.txt", "utf8", function (error, data) {
+        if (error) {
+            return console.log(error);
+        }
+        // split data into new array
+        let dataArr = data.split(",");
+        // turn random.txt objects into parameters
+        userInput = dataArr[0];
+        userQuery = dataArr[1];
+        // call function with new parameters
+        userCommand(userInput, userQuery);
+    });
+};
