@@ -13,8 +13,8 @@ const fs = require("fs");
 const keys = require("./keys");
 
 // initialize spotify
-const Spotify = require("node-spotify-api");
-const spotify = new Spotify(keys.spotify);
+// const Spotify = require("node-spotify-api");
+// const spotify = new Spotify(keys.spotify);
 
 // OMDB and Bands in Town APIs
 let omdb = (keys.omdb);
