@@ -72,3 +72,31 @@ function concertThis() {
         };
     });
 };
+
+// spotify search function
+function spotifyThisSong() {
+    console.log(`\n - - - - -\n\nSEARCHING FOR..."${userQuery}"`);
+
+    //if artist not found, pass in Ace of Base instead
+    if (!userQuery) {
+        userQuery = "the sign ace of base"
+    };
+
+    // spotify search
+    spotify.search({
+        type: 'track',
+        query: userQuery,
+        limit: 1
+    }, function (error, data) {
+        if (error) {
+            return console.log('Error occurred: ' + error);
+        }
+        // turn collected data into an array
+        let spotifyArr = data.tracks.items;
+
+        for (i = 0; i < spotifyArr.length; i++) {
+            console.log(`\nYass!\n\nArtist: ${data.tracks.items[i].album.artists[0].name} \nSong: ${data.tracks.items[i].name}\nAlbum: ${data.tracks.items[i].album.name}\nSpotify link: ${data.tracks.items[i].external_urls.spotify}\n\n - - - - -`)
+        };
+    });
+}
+
