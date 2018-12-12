@@ -65,11 +65,10 @@ function concertThis() {
                     // format date with moment
                     let concertDate = moment(userBand[i].dateTime).format("MM/DD/YYY hh:00 A");
                     console.log(`Date and Time: ${concertDate}\n\n- - - - -`);
-                };
-                else{
-                    console.log('Band or concert not found!');
-                };
+                }; 
+            } else{
+                console.log('Band or concert not found!');
             };
-        }
-    })
-}
+        };
+    });
+};
