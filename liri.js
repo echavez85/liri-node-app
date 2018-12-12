@@ -52,7 +52,7 @@ userCommand(userInput, userQuery);
 function concertThis() {
     console.log(`\n - - - - -\n\nSEARCHING FOR...${userQuery}'s next show...`);
     // use request as query
-    request("https://rest.bandsintown.com/artists/" + userQuery + "/events?app_id=" + bandsintown, function (error, response, body) {
+    request("https://rest.bandsintown.com/artists/" + artist + "/events?app_id=codingbootcamp", function (error, response, body) {
         // if everything ok, give ok message
         if (!error && response.statusCode === 200) {
             // capture data using JSON to format
@@ -99,4 +99,25 @@ function spotifyThisSong() {
         };
     });
 }
+
+// omdb search function
+function movieThis() {
+    console.log(`\n - - - - -\n\nSEARCHING FOR..."${userQuery}"`);
+    if (!userQuery) {
+        userQuery = "mr nobody";
+    };
+    // omdb API request
+    request("http://www.omdbapi.com/?t=" + userQuery + "&apikey=trilogy", function (error, response, body) {
+        let userMovie = JSON.parse(body);
+
+        // capture rotten tomatoes response in array
+        let ratingsArr = userMovie.Ratings;
+        if (ratingsArr.length > 2) {}
+        if (!error && response.statuscode === 200) {
+            console.log(`\nYay!\n\nTitle: ${userMovie.Title}\nCast: ${userMovie.Actors}\nReleased: ${userMovie.Year}\nIMDb Rating: ${userMovie.imdbRating}\nRotten Tomatoes Rating: ${userMovie.Ratings[1].Value}\nCountry: ${userMovie.Country}\nLanguage: ${userMovie.Language}\nPlot: ${userMovie.Plot}\n\n- - - - -`)
+        } else {
+            return console.log("Movie not found: " + error)
+        };
+    })
+};
 
