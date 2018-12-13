@@ -52,7 +52,7 @@ userCommand(userInput, userQuery);
 function concertThis() {
     console.log(`\n - - - - -\n\nSEARCHING FOR...${userQuery}'s next show...`);
     // use request as query
-    request("https://rest.bandsintown.com/artists/" + artist + "/events?app_id=codingbootcamp", function (error, response, body) {
+    request(`https://rest.bandsintown.com/artists/"${userQuery}/events?app_id=codingbootcamp`, function (error, response, body) {
         // if everything ok, give ok message
         if (!error && response.statusCode === 200) {
             // capture data using JSON to format
