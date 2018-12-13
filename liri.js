@@ -31,13 +31,13 @@ function userCommand(userInput, userQuery) {
         case "concert-this":
             concertThis();
             break;
-        case "spotify-this":
+        case "spotify-this-song":
             spotifyThisSong();
             break;
         case "movie-this":
             movieThis();
             break;
-        case "do-this":
+        case "do-what-it-says":
             doWhatItSays(userQuery);
             break;
         default:
