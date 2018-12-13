@@ -107,7 +107,7 @@ function movieThis() {
         userQuery = "mr nobody";
     };
     // omdb API request
-    request("http://www.omdbapi.com/?t=" + userQuery + "&apikey=trilogy", function (error, response, body) {
+    request(`http://www.omdbapi.com/?t=${userQuery}&apikey=trilogy`, function (error, response, body) {
         let userMovie = JSON.parse(body);
 
         // capture rotten tomatoes response in array
