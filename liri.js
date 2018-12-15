@@ -103,8 +103,8 @@ SEARCHING FOR...${userQuery}`);
                 `
 Artist: ${data.tracks.items[i].album.artists[0].name}
 Song: ${data.tracks.items[i].name}
-Album: ${data.tracks.items[i].album.name}
 Spotify link: ${data.tracks.items[i].external_urls.spotify}
+Album: ${data.tracks.items[i].album.name}
 =================
                 `)
         };
@@ -131,13 +131,13 @@ SEARCHING FOR...${userQuery}`);
             console.log(
             `
 Title: ${userMovie.Title}
-Cast: ${userMovie.Actors}
 Released: ${userMovie.Year}
 IMDb Rating: ${userMovie.imdbRating}
 Rotten Tomatoes Rating: ${userMovie.Ratings[1].Value}
 Country: ${userMovie.Country}
 Language: ${userMovie.Language}
 Plot: ${userMovie.Plot}
+Cast: ${userMovie.Actors}
 =================
             `  
             )
