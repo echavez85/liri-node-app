@@ -56,7 +56,7 @@ function concertThis() {
         // if everything ok, give ok message
         if (!error && response.statusCode === 200) {
             // capture data using JSON to format
-            let userBand = JSON.parse(body);
+            let userBand = JSON.toString(body);
             // parse and use for loop to access data
             if(userBand.length > 0) {
                 for(i=0; i<1; i++) {
@@ -75,7 +75,7 @@ function concertThis() {
 
 // spotify search function
 function spotifyThisSong() {
-    console.log(`\n - - - - -\n\nSEARCHING FOR..."${userQuery}"`);
+    console.log(`\n - - - - -\n\nSEARCHING FOR...${userQuery}`);
 
     //if artist not found, pass in Ace of Base instead
     if (!userQuery) {
@@ -102,7 +102,7 @@ function spotifyThisSong() {
 
 // omdb search function
 function movieThis() {
-    console.log(`\n - - - - -\n\nSEARCHING FOR..."${userQuery}"`);
+    console.log(`\n - - - - -\n\nSEARCHING FOR...${userQuery}`);
     if (!userQuery) {
         userQuery = "mr nobody";
     };
