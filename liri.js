@@ -50,32 +50,40 @@ userCommand(userInput, userQuery);
 
 // concert function
 function concertThis() {
-    console.log(`\n - - - - -\n\nSEARCHING FOR...${userQuery}'s next show...`);
+    console.log(
+        `
+=================
+SEARCHING FOR...${userQuery}'s next show...`);
     // use request as query
-    request(`https://rest.bandsintown.com/artists/"${userQuery}/events?app_id=codingbootcamp`, function (error, response, body) {
+    request(`https://rest.bandsintown.com/artists/${userQuery}/events?app_id=codingbootcamp`, function (error, response, body) {
         // if everything ok, give ok message
-        if (!error && response.statusCode === 200) {
+        if (!error && response.statusCode === 200) {            
             // capture data using JSON to format
-            let userBand = JSON.toString(body);
-            // parse and use for loop to access data
-            if(userBand.length > 0) {
-                for(i=0; i<1; i++) {
+            let userBand = JSON.parse(body);
+            // format date with moment
+            let concertDate = moment(userBand[0].dateTime).format("MM/DD/YYYY hh:00 A");            
+            // parse data
                     // console log data
-                    console.log(`\nWoohoo!!\n\nArtist: ${userBand[i].lineup[0]} \nVenue: ${userBand[i].venue.name}\nVenue Location: ${userBand[i].venue.latitude},${userBand[i].venue.longitude}\nVenue City: ${userBand[i].venue.city}, ${userBand[i].venue.country}`)
-                    // format date with moment
-                    let concertDate = moment(userBand[i].dateTime).format("MM/DD/YYY hh:00 A");
-                    console.log(`Date and Time: ${concertDate}\n\n- - - - -`);
-                }; 
-            } else{
-                console.log('Band or concert not found!');
-            };
+                    console.log(
+                        `
+Artist: ${userBand[0].lineup}
+Venue: ${userBand[0].venue.name}
+Venue Location: ${userBand[0].venue.latitude},${userBand[0].venue.longitude}
+Venue City: ${userBand[0].venue.city}, ${userBand[0].venue.country}
+Date and Time: ${concertDate}
+=================
+                        `);
+
         };
     });
 };
 
 // spotify search function
 function spotifyThisSong() {
-    console.log(`\n - - - - -\n\nSEARCHING FOR...${userQuery}`);
+    console.log(
+        `
+=================
+SEARCHING FOR...${userQuery}`);
 
     //if artist not found, pass in Ace of Base instead
     if (!userQuery) {
@@ -95,29 +103,53 @@ function spotifyThisSong() {
         let spotifyArr = data.tracks.items;
 
         for (i = 0; i < spotifyArr.length; i++) {
-            console.log(`\nYass!\n\nArtist: ${data.tracks.items[i].album.artists[0].name} \nSong: ${data.tracks.items[i].name}\nAlbum: ${data.tracks.items[i].album.name}\nSpotify link: ${data.tracks.items[i].external_urls.spotify}\n\n - - - - -`)
+            console.log(
+                `
+Artist: ${data.tracks.items[i].album.artists[0].name}
+Song: ${data.tracks.items[i].name}
+Album: ${data.tracks.items[i].album.name}
+Spotify link: ${data.tracks.items[i].external_urls.spotify}
+=================
+                `)
         };
     });
 }
 
 // omdb search function
 function movieThis() {
-    console.log(`\n - - - - -\n\nSEARCHING FOR...${userQuery}`);
+    console.log(
+        `
+=================
+SEARCHING FOR...${userQuery}`);
     if (!userQuery) {
         userQuery = "mr nobody";
     };
     // omdb API request
     request(`http://www.omdbapi.com/?t=${userQuery}&apikey=trilogy`, function (error, response, body) {
-        let userMovie = JSON.parse(body);
-
-        // capture rotten tomatoes response in array
-        let ratingsArr = userMovie.Ratings;
-        if (ratingsArr.length > 2) {}
-        if (!error && response.statuscode === 200) {
-            console.log(`\nYay!\n\nTitle: ${userMovie.Title}\nCast: ${userMovie.Actors}\nReleased: ${userMovie.Year}\nIMDb Rating: ${userMovie.imdbRating}\nRotten Tomatoes Rating: ${userMovie.Ratings[1].Value}\nCountry: ${userMovie.Country}\nLanguage: ${userMovie.Language}\nPlot: ${userMovie.Plot}\n\n- - - - -`)
-        } else {
+        if (error) {
             return console.log("Movie not found: " + error)
-        };
+        }
+
+        let userMovie = JSON.parse(body);
+        if (!userMovie.Error) {
+            console.log(
+            `
+Title: ${userMovie.Title}
+Cast: ${userMovie.Actors}
+Released: ${userMovie.Year}
+IMDb Rating: ${userMovie.imdbRating}
+Rotten Tomatoes Rating: ${userMovie.Ratings[1].Value}
+Country: ${userMovie.Country}
+Language: ${userMovie.Language}
+Plot: ${userMovie.Plot}
+=================
+            `  
+            )
+        }
+        else{
+            console.log('NOT A MOVIE');
+            
+        }
     })
 };
 
