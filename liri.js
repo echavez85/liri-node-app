@@ -16,10 +16,6 @@ const keys = require("./keys");
 const Spotify = require("node-spotify-api");
 const spotify = new Spotify(keys.spotify);
 
-// OMDB and Bands in Town APIs
-// let omdb = (keys.omdb);
-// let bandsintown = (keys.bandsintown);
-
 // take user command and input
 let userInput = process.argv[2];
 let userQuery = process.argv.slice(3).join(" ");
